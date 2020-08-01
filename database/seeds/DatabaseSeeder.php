@@ -1,16 +1,29 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Spatie\Multitenancy\Models\Tenant as Tenanto;
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
+
+
     public function run()
     {
-     $this->call(TenantSeeder::class);
+        Tenanto::checkCurrent()
+            ? $this->runTenantSpecificSeeders()
+            : $this->runLandlordSpecificSeeders();
     }
+
+    public function runTenantSpecificSeeders()
+    {
+        $this->call(EmployeeSeeder::class);
+        $this->call(UserSeeder::class);
+
+    }
+
+    public function runLandlordSpecificSeeders()
+    {
+        $this->call(TenantSeeder::class);
+    }
+
+
 }

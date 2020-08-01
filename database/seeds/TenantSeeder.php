@@ -1,8 +1,8 @@
 <?php
 /*
-Author: Raul Perusquia (raul@inikoo.com)
+Author: Raul Perusquía (raul@inikoo.com)
 Created:  Mon Jul 27 2020 17:38:26 GMT+0800 (Malaysia Time) Tioman, Malaysia
-Copyright (c) 2020, Raúl Alejandro Perusquía Flores
+Copyright (c) 2020, AIku.io
 
 Version 4
 */
