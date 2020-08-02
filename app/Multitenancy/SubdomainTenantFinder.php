@@ -8,7 +8,7 @@ Version 4
 */
 
 
-namespace App;
+namespace App\Multitenancy;
 
 use Illuminate\Http\Request;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantModel;

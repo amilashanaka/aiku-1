@@ -14,7 +14,7 @@ return [
      * This class should extend `Spatie\Multitenancy\TenantFinder\TenantFinder`
      *
      */
-    'tenant_finder' => \App\SubdomainTenantFinder::class,
+    'tenant_finder' => \App\Multitenancy\SubdomainTenantFinder::class,
 
     /*
      * These fields are used by tenant:artisan command to match one or more tenant
@@ -29,7 +29,8 @@ return [
      * A valid task is any class that implements Spatie\Multitenancy\Tasks\SwitchTenantTask
      */
     'switch_tenant_tasks' => [
-        Spatie\Multitenancy\Tasks\SwitchTenantDatabaseTask::class
+        \App\Multitenancy\SwitchTenantDatabaseTask::class
+
     ],
 
     /*
