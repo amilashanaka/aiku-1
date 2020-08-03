@@ -1,7 +1,13 @@
+
+Create database master 
+
+
 #### Multi tenancy
 
+
+
 ##### Landlord database migrations
-`php artisan migrate --path=database/migrations/landlord --database=landlord `
+`php artisan migrate --path=database/migrations/landlord --database=landlord`
 
 ##### Tenants database migrations
 `php artisan tenants:artisan "migrate --database=tenant"`
