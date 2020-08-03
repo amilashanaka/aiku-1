@@ -35,4 +35,9 @@ class User extends Authenticatable
         'data'     => 'array'
     ];
 
+    public function userable()
+    {
+        return $this->morphTo();
+    }
+
 }

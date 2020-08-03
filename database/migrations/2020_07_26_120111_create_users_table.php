@@ -38,24 +38,23 @@ class CreateUsersTable extends Migration {
             $table->string('handle');
             $table->string('password');
 
-            $table->enum(
-                'userable', [
-                              'Employee',
-                              'Contractor',
-                              'Supplier',
-                              'Agent'
-                          ]
-            )->default('Employee');
+            $table->string('userable_type');
             $table->unsignedMediumInteger('userable_id');
 
             $table->json('settings')->default(new Expression('(JSON_ARRAY())'));
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));
             $table->timestamps();
-            $table->unsignedMediumInteger('legacy_id');
+            $table->unsignedMediumInteger('legacy_id')->nullable();
             $table->index(
                 [
                     'tenant_id',
                     'handle'
+                ]
+            );
+            $table->index(
+                [
+                    'userable_type',
+                    'userable_id'
                 ]
             );
             $table->index('status');

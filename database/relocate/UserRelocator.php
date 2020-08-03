@@ -65,7 +65,7 @@ class UserRelocator extends Relocator {
                     ], [
                         'password'    => bcrypt($legacy_data->{'User Password'}),
                         'legacy_id'   => $legacy_data->{'User Key'},
-                        'userable'    => $user_parent,
+                        'userable_type'    => $user_parent,
                         'userable_id' => $user_parent_key,
                         'status'      => ($legacy_data->{'User Active'} == 'Yes' ? 'Active' : 'Disabled'),
                         'settings'    => $user_settings,

@@ -10,23 +10,31 @@ Version 4
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 
 /**
  * App\Employee
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Employee newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Employee newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Employee query()
+ * @method static Builder|Employee newModelQuery()
+ * @method static Builder|Employee newQuery()
+ * @method static Builder|Employee query()
  * @mixin \Eloquent
  */
-class Employee extends Model
-{
+class Employee extends Model {
     use UsesTenantConnection;
 
     protected $casts = [
         'settings' => 'array',
         'data'     => 'array'
     ];
+
+    public function user()
+    {
+        return $this->morphOne('App\User', 'userable');
+    }
+
+
+
 }

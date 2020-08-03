@@ -7,14 +7,10 @@ Copyright (c) 2020, AIku.io
 Version 4
 */
 
-include_once 'LegacyMigrationSeeder.php';
+use Illuminate\Database\Seeder;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 
-use App\Employee;
-
-class EmployeeSeeder extends Relocator {
+class EmployeeSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
@@ -25,38 +21,30 @@ class EmployeeSeeder extends Relocator {
 
         $tenant = app('currentTenant');
 
-        $this->set_legacy_connection($tenant->data['legacy_database']);
+
+        factory(App\Employee::class, rand(10, 20))->create(
+            [
+                'tenant_id' => $tenant->id,
+            ]
+        )->each(
+            function ($employee) {
+
+                $parent_class=(new \ReflectionClass($employee))->getShortName();
+
+                $employee->user()->save(
+                    factory(App\User::class)->make(
+                        [
+                            'tenant_id'        => $employee->tenant_id,
+                            'handle'        => $employee->slug,
+                            'userable_id'   => $employee->id,
+                            'userable_type' => $parent_class
+                        ]
+                    )
+                );
 
 
-        foreach (
-            DB::connection('legacy')->select("select * from`Staff Dimension`", []) as $legacy_data
-        ) {
-
-
-
-            $employee_data = $this->fill_data(
-                [
-                    'personal_identification' => 'Staff Official ID',
-                    'next_of_kind.name'       => 'Staff Next of Kind',
-                    'date_of_birth'           => 'Staff Birthday'
-                ], $legacy_data
-            );
-
-
-            Employee::firstOrCreate(
-                [
-                    'tenant_id' => $tenant->id,
-                    'slug'      => Str::kebab($legacy_data->{'Staff Name'}),
-                    'name'      => $legacy_data->{'Staff Name'},
-                ], [
-                    'legacy_id' => $legacy_data->{'Staff Key'},
-                    'status'    => ($legacy_data->{'Staff Currently Working'} == 'Yes' ? 'Working' : 'NotWorking'),
-                    'data'      => $employee_data
-
-                ]
-            );
-
-        }
+            }
+        );
 
     }
 
