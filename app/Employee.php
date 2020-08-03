@@ -13,6 +13,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 
+/**
+ * App\Employee
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Employee newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Employee newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Employee query()
+ * @mixin \Eloquent
+ */
 class Employee extends Model
 {
     use UsesTenantConnection;

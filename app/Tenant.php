@@ -11,17 +11,28 @@ Version 4
 namespace App;
 
 use Exception;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
+use Artisan;
+use DB;
+
 use Spatie\Multitenancy\Models\Tenant as Tenanto;
 
 /**
  * Class Tenant
  *
- * @property string database
- * @property integer  id
  * @package App
- *
+ * @property int $id
+ * @property string $name
+ * @property string $subdomain
+ * @property string $database
+ * @property array $settings
+ * @property array $data
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Agent[] $agents
+ * @property-read int|null $agents_count
+ * @property-read \App\Supplier|null $supplier_owner
+
+ * @mixin \Eloquent
  */
 class Tenant extends Tenanto {
     protected $casts = [
@@ -40,21 +51,17 @@ class Tenant extends Tenanto {
     public function post_creation_actions() {
 
         if (ctype_alpha($this->database) or ctype_lower($this->database)) {
-
             throw new Exception('Invalid database name');
-
         }
-
-
+        
         DB::connection('scaffolding')->statement("DROP DATABASE IF EXISTS " . $this->database);
-
         DB::connection('scaffolding')->statement("CREATE DATABASE IF NOT EXISTS " . $this->database);
         Artisan::call('tenants:artisan "migrate --database=tenant" --tenant='.$this->id );
 
     }
 
     public function agents() {
-        return $this->belongsToMany('App\Agent')->withTimestamps();;
+        return $this->belongsToMany('App\Agent')->withTimestamps();
     }
 
     public function supplier_owner() {
