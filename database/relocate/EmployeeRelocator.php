@@ -7,14 +7,14 @@ Copyright (c) 2020, AIku.io
 Version 4
 */
 
-include_once 'LegacyMigrationSeeder.php';
+include_once 'Relocator.php';
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 use App\Employee;
 
-class EmployeeSeeder extends Relocator {
+class EmployeeRelocator extends Relocator {
     /**
      * Run the database seeds.
      *

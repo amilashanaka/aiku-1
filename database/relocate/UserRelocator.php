@@ -13,7 +13,7 @@ use App\Employee;
 use App\User;
 
 
-class UserSeeder extends Seeder {
+class UserRelocator extends Relocator {
     /**
      * Run the database seeds.
      *

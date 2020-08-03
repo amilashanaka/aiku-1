@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 
 
-class LegacyMigrationSeeder extends Seeder
+class Relocator extends Seeder
 {
 
     public function fill_data($fields, $legacy_data) {

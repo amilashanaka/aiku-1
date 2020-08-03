@@ -1,15 +1,14 @@
 <?php
 /*
-Author: Raul Perusquía (raul@inikoo.com)
-Created:  Mon Jul 27 2020 17:38:26 GMT+0800 (Malaysia Time) Tioman, Malaysia
-Copyright (c) 2020, AIku.io
+Author: Raul A Perusquía-Flores (raul@inikoo.com)
+Created:  Mon Aug 03 2020 11:15:17 GMT+0800 (Malaysia Time) Kuala Lumpur, Malaysia 
+Copyright (c) 2020,  AIku.io
 
 Version 4
 */
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use App\Tenant;
 
 class TenantSeeder extends Seeder {
     /**
@@ -18,31 +17,10 @@ class TenantSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        $database_names = preg_split('/,/', env('MIGRATION_DATABASE_NAMES'));
-        $tenant_codes   = preg_split('/,/', env('MIGRATION_TENANT_CODES'));
-        $legacy_codes   = preg_split('/,/', env('MIGRATION_ACCOUNT_LEGACY_CODES'));
 
-        foreach ($tenant_codes as $index => $tenant_code) {
-            Tenant::firstOrCreate(
-                [
-                    'name' => $tenant_code,
-                ], [
-                    'subdomain' => Str::kebab($tenant_code),
-                    'database' => 'au_'. Str::kebab($tenant_code),
+        factory(App\Tenant::class, 3)->create()->each(function ($tenant) {
 
-                    'data'     => [
-                        'legacy_code' => $legacy_codes[$index],
-                        'legacy_database' => $database_names[$index],
-
-                    ],
-                    'settings' => [
-                        'recover_email' => 'recover@inikoo.com',
-                        'recover_pin'   => hash('crc32', rand(0, 10000))
-                    ]
-                ]
-            );
-        }
-
+        });
 
     }
 }
