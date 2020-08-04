@@ -14,3 +14,5 @@ npm-debug.log
 yarn-error.log
 .vagrant
 Vagrantfile
+programmatic-types.graphql
+_lighthouse_ide_helper.php
