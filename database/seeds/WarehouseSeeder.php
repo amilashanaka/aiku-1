@@ -19,72 +19,43 @@ class WarehouseSeeder extends Seeder {
     public function run() {
 
         $tenant = app('currentTenant');
-        factory(App\Warehouse::class, rand(2,3))->create(
+        factory(App\Warehouse::class, rand(2, 3))->create(
             [
                 'tenant_id' => $tenant->id,
             ]
-            )->each(
-                function ($warehouse) {
+        )->each(
+            function ($warehouse) {
 
-        
-                    $warehouse->areas()->saveMany( factory(App\Area::class, 5)->make(
+
+                $warehouse->areas()->saveMany(
+                    factory(App\WarehouseArea::class, 5)->make(
                         [
-                            'tenant_id'=>$warehouse->tenant_id,
-                            
+                            'tenant_id' => $warehouse->tenant_id
                         ]
-                    ) )->each(
-                        function ($area){
-
-                           
-
-                            
-                            $area->locations()->saveMany(
-                                factory(App\Location::class,10)->make(['tenant_id'=>$area->tenant_id]) 
-                            );
-
-                        }
-                    );
-
-                           
-                                                   
+                    )
+                )->each(
+                    function ($area) {
 
 
-                    
+                        $area->locations()->saveMany(
+                            factory(App\Location::class, 10)->make(
+                                [
+                                    'tenant_id' => $area->tenant_id
+                                ]
+                            )
+                        );
+
+                    }
+                );
 
 
-                
-    
-                }
-
-                
-            );
-    
+            }
 
 
+        );
 
 
-
-
-
-
-
-
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        }
+    }
 
 
 }

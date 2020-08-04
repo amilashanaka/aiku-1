@@ -7,9 +7,19 @@ use Illuminate\Database\Eloquent\Builder;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 
 
+/**
+ * App\Warehouse
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\WarehouseArea[] $areas
+ * @property-read int|null $areas_count
+ * @method static Builder|Warehouse newModelQuery()
+ * @method static Builder|Warehouse newQuery()
+ * @method static Builder|Warehouse query()
+ * @mixin \Eloquent
+ */
 class Warehouse extends Model
 {
-   
+
     use UsesTenantConnection;
 
     protected $casts = [
@@ -19,9 +29,9 @@ class Warehouse extends Model
 
     public function areas()
     {
-        return $this->hasMany('App\Area');
+        return $this->hasMany('App\WarehouseArea');
     }
-   
-   
+
+
 
 }

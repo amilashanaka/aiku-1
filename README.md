@@ -6,7 +6,7 @@
 ##### Tenants database migrations
 `php artisan tenants:artisan "migrate --database=tenant"`
 ##### Tenants database seeding
-`php artisan tenants:artisan "migrate --database=tenant --seed`
+`php artisan tenants:artisan "migrate --database=tenant --seed"`
 
 
 ## create model 
