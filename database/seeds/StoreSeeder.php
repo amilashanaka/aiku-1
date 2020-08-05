@@ -37,6 +37,14 @@ class StoreSeeder extends Seeder
                     )
                 );
 
+                $store->invoices()->saveMany(
+                    factory(App\Invoice::class, 5)->make(
+                        [
+                            'tenant_id' => $store->tenant_id
+                        ]
+                    )
+                );
+
 
             }
 
