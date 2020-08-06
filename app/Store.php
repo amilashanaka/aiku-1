@@ -46,7 +46,10 @@ class Store extends Model {
         return $this->hasMany('App\Website');
     }
 
-
+    public function charges()
+    {
+        return $this->hasMany('App\Charge');
+    }
 
 
     
