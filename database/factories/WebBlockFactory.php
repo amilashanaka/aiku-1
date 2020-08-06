@@ -2,7 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Webblock;
+use App\WebBlock;
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
 $factory->define(WebBlock::class, function (Faker $faker,$args) {

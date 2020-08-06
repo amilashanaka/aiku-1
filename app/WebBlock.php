@@ -22,4 +22,6 @@ class WebBlock extends Model {
     {
         return $this->belongsTo('App\Webpage');
     }
+   
+
 }

@@ -28,4 +28,5 @@ class Website extends Model {
         return $this->hasMany('App\Webpage');
     }
 
+
 }
