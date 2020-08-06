@@ -29,4 +29,10 @@ class Website extends Model {
     }
 
 
+    public function web_users()
+    {
+        return $this->hasMany('App\WebUser');
+    }
+
+
 }

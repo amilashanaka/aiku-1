@@ -47,6 +47,7 @@ class StoreSeeder extends Seeder
                     )
                 );
 
+
                 $store->websites()->saveMany(
                     factory(App\Website::class, 1)->make(
                         [
@@ -66,14 +67,20 @@ class StoreSeeder extends Seeder
                         );
 
 
+
+                        $website->web_users()->saveMany(
+                            factory(App\WebUser::class, 10)->make(
+                                [
+                                    'tenant_id' => $website->tenant_id
+                                ]
+                            )
+                        );
                         
                         
 
                     }
                 );
 
-
-                
 
                 $store->orders()->saveMany(
                     factory(App\Order::class, 5)->make(

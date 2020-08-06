@@ -10,7 +10,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 
-class Customer extends Model {
+class WebUser extends Model {
     use UsesTenantConnection;
 
     protected $casts = [
@@ -18,10 +18,9 @@ class Customer extends Model {
         'data'     => 'array'
     ];
 
-    public function store()
+    public function website()
     {
-        return $this->belongsTo('App\Store');
+        return $this->belongsTo('App\Website');
     }
 
- 
 }
