@@ -41,6 +41,12 @@ class Store extends Model {
         return $this->hasMany('App\Customer');
     }
 
+    public function websites()
+    {
+        return $this->hasMany('App\Website');
+    }
+
+
 
 
     

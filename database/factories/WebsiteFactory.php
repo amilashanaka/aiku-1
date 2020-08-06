@@ -3,9 +3,10 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Website;
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
-$factory->define(Website::class, function (Faker $faker,$arg) {
+$factory->define(Website::class, function (Faker $faker,$args) {
     $name = $faker->word;
    
     return [
