@@ -8,10 +8,9 @@ Version 4
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 
-class Store extends Model {
+class Order extends Model {
     use UsesTenantConnection;
 
     protected $casts = [
@@ -19,18 +18,13 @@ class Store extends Model {
         'data'     => 'array'
     ];
 
-    public function prospects()
+    public function store()
     {
-        return $this->hasMany('App\Prospect');
+        return $this->belongsTo('App\Store');
     }
 
-    public function invoices()
+    public function invoice()
     {
-        return $this->hasMany('App\Invoice');
-    }
-
-    public function orders()
-    {
-        return $this->hasMany('App\Order');
+        return $this->hasOne('App\Invoice');
     }
 }
