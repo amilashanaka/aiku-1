@@ -37,6 +37,28 @@ class StoreSeeder extends Seeder
                     )
                 );
 
+                $store->products()->saveMany(
+                    factory(App\Product::class, 5)->make(
+                        [
+                            'tenant_id' => $store->tenant_id
+                        ]
+                    )
+                )->each(
+                    function ($product) {
+
+
+                        $product->parts()->saveMany(
+                            factory(App\Part::class, 10)->make(
+                                [
+                                    'tenant_id' => $product->tenant_id
+                                ]
+                            )
+                        );
+ 
+                    }
+                );
+
+
                
                 $store->charges()->saveMany(
                     factory(App\Charge::class, 5)->make(

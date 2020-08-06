@@ -51,6 +51,11 @@ class Store extends Model {
         return $this->hasMany('App\Charge');
     }
 
+    public function products()
+    {
+        return $this->hasMany('App\Product');
+    }
+
 
     
 }
