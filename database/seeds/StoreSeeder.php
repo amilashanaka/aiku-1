@@ -44,7 +44,14 @@ class StoreSeeder extends Seeder
                         ]
                     )
                 );
-
+                
+                $store->customers()->saveMany(
+                    factory(App\Customer::class, 100)->make(
+                        [
+                            'tenant_id' => $store->tenant_id
+                        ]
+                    )
+                );
 
                 
 
