@@ -17,4 +17,9 @@ class DeliveryNote extends Model {
         'settings' => 'array',
         'data'     => 'array'
     ];
+
+    public function store()
+    {
+        return $this->belongsTo('App\Store');
+    }
 }

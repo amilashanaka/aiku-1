@@ -37,6 +37,15 @@ class StoreSeeder extends Seeder
                     )
                 );
 
+                $store->delivery_notes()->saveMany(
+                    factory(App\DeliveryNote::class, 5)->make(
+                        [
+                            'tenant_id' => $store->tenant_id
+                        ]
+                    )
+                );
+
+
                 
 
                 $store->orders()->saveMany(
