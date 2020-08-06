@@ -68,6 +68,21 @@ class StoreSeeder extends Seeder
                         
 
                     }
+                )->each(
+                    function ($webpage) {
+
+
+                        $website->webpages()->saveMany(
+                            factory(App\Webpage::class, 10)->make(
+                                [
+                                    'tenant_id' => $website->tenant_id
+                                ]
+                            )
+                        );
+
+                        
+
+                    }
                 );
 
 

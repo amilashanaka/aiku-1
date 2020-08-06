@@ -10,7 +10,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 
-class Webpage extends Model {
+class WebBlock extends Model {
     use UsesTenantConnection;
 
     protected $casts = [
@@ -18,16 +18,8 @@ class Webpage extends Model {
         'data'     => 'array'
     ];
 
-    public function website()
+    public function webpage()
     {
-        return $this->belongsTo('App\Website');
+        return $this->belongsTo('App\Webpage');
     }
-
-
-    public function web_blocks()
-    {
-        return $this->hasMany('App\WebBlock');
-    }
-
-    
 }
