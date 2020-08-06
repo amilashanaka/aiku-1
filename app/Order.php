@@ -27,4 +27,8 @@ class Order extends Model {
     {
         return $this->hasOne('App\Invoice');
     }
+    public function delivery_notes()
+    {
+        return $this->hasMany('App\DeliveryNote');
+    }
 }

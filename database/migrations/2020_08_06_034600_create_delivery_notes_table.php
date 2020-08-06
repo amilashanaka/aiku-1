@@ -17,8 +17,8 @@ class CreateDeliveryNotesTable extends Migration
         Schema::create('delivery_notes', function (Blueprint $table) {
             $table->mediumIncrements('id');
             $table->unsignedSmallInteger('tenant_id');
-            $table->unsignedMediumInteger('store_id');
-            $table->foreign('store_id')->references('id')->on('stores');
+            $table->unsignedMediumInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->string('slug');
             $table->json('settings')->default(new Expression('(JSON_ARRAY())'));
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));

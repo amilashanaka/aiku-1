@@ -37,13 +37,7 @@ class StoreSeeder extends Seeder
                     )
                 );
 
-                $store->delivery_notes()->saveMany(
-                    factory(App\DeliveryNote::class, 5)->make(
-                        [
-                            'tenant_id' => $store->tenant_id
-                        ]
-                    )
-                );
+               
                 
                 $store->customers()->saveMany(
                     factory(App\Customer::class, 100)->make(
@@ -67,6 +61,14 @@ class StoreSeeder extends Seeder
 
                         $order->invoice()->saveMany(
                             factory(App\Invoice::class, 1)->make(
+                                [
+                                    'tenant_id' => $order->tenant_id
+                                ]
+                            )
+                        );
+
+                        $order->delivery_notes()->saveMany(
+                            factory(App\DeliveryNote::class, 5)->make(
                                 [
                                     'tenant_id' => $order->tenant_id
                                 ]
