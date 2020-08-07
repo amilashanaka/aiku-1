@@ -8,6 +8,8 @@ Version 4
 */
 
 namespace App;
+use App\Events\UserHandleChanged;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -29,12 +31,21 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens,Notifiable,UsesTenantConnection;
+    use HasApiTokens,Notifiable,UsesTenantConnection,Sluggable;
 
     protected $casts = [
         'settings' => 'array',
         'data'     => 'array'
     ];
+
+    public function sluggable()
+    {
+        return [
+            'handle' => [
+                'source' => 'userable.slug'
+            ]
+        ];
+    }
 
     public function userable()
     {

@@ -16,17 +16,13 @@ use Faker\Generator as Faker;
 
 
 $factory->define(
-    Employee::class, function (Faker $faker,$tenant_id) {
+    Employee::class, function (Faker $faker, $tenant_id) {
 
-
-
-
-    $name = $faker->name;
 
     return [
         'tenant_id' => $tenant_id,
-        'name'      => $name,
-        'slug'      => Str::slug($name),
+        'name'      => $faker->name,
+        'status'    => 'Working'
 
     ];
 }

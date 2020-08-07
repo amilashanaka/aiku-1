@@ -26,7 +26,7 @@ class CreateEmployeesTable extends Migration
             $table->mediumIncrements('id');
             $table->unsignedSmallInteger('tenant_id');
             $table->enum('status',['Working','NotWorking'])->default('Working');
-            $table->string('slug')->unique();
+            $table->string('slug')->nullable()->unique();
             $table->string('name');
             $table->json('settings')->default(new Expression('(JSON_ARRAY())'));
             $table->json('data')->default(new Expression('(JSON_ARRAY())'));

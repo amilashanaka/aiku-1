@@ -35,7 +35,7 @@ class CreateUsersTable extends Migration {
                         ]
             )->default('Active');
 
-            $table->string('handle');
+            $table->string('handle')->unique();
             $table->string('password');
 
             $table->string('userable_type');

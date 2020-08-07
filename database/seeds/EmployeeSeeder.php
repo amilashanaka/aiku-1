@@ -26,24 +26,6 @@ class EmployeeSeeder extends Seeder {
             [
                 'tenant_id' => $tenant->id,
             ]
-        )->each(
-            function ($employee) {
-
-                $parent_class=(new \ReflectionClass($employee))->getShortName();
-
-                $employee->user()->save(
-                    factory(App\User::class)->make(
-                        [
-                            'tenant_id'        => $employee->tenant_id,
-                            'handle'        => $employee->slug,
-                            'userable_id'   => $employee->id,
-                            'userable_type' => $parent_class
-                        ]
-                    )
-                );
-
-
-            }
         );
 
     }

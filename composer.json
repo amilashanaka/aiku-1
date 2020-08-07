@@ -9,10 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.4",
+        "cviebrock/eloquent-sluggable": "^7.0",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "galahad/laravel-addressing": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
+        "jpkleemans/attribute-events": "^1.0",
         "laravel/framework": "^7.22.2",
         "laravel/sanctum": "^2.4",
         "laravel/tinker": "^2.0",

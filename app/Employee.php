@@ -12,7 +12,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 /**
  * App\Employee
@@ -24,18 +27,54 @@ use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
  * @property-read \App\User|null $user
  */
 class Employee extends Model {
-    use UsesTenantConnection;
+    use UsesTenantConnection, Sluggable;
 
     protected $casts = [
         'settings' => 'array',
         'data'     => 'array'
     ];
 
-    public function user()
-    {
+    public function sluggable() {
+        return [
+            'slug' => [
+                'source'   => 'name',
+                'onUpdate' => true
+            ]
+        ];
+    }
+
+    public function user() {
         return $this->morphOne('App\User', 'userable');
     }
 
+    public function timesheets() {
+        return $this->hasMany('App\Order');
+    }
+
+    protected static function booted() {
+        static::created(
+            function ($employee) {
+
+
+                User::firstOrCreate(
+                    [
+
+                        'handle' => Str::slug($employee->name)
+                    ], [
+                        'tenant_id'     => $employee->tenant_id,
+                        'password'      => (env('APP_ENV', 'production') == 'local' ? Hash::make('password') : Hash::make(Str::random(40))),
+                        'legacy_id'     => $employee->legacy_id,
+                        'userable_type' => 'App\Employee',
+                        'userable_id'   => $employee->id,
+                        'status'        => ($employee->status == 'Working' ? 'Active' : 'Disabled'),
+                        'settings'      => [],
+                        'data'          => []
+
+                    ]
+                );
+            }
+        );
+    }
 
 
 }
