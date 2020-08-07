@@ -61,6 +61,10 @@ class Store extends Model {
         return $this->hasMany('App\InmutableAddress');
     }
 
+    public function inmutable_products()
+    {
+        return $this->hasMany('App\InmutableProduct');
+    }
 
     
 }
