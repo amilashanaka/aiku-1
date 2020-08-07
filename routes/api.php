@@ -14,14 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/login', 'LoginController@authenticate');
 
-Route::get('/login/spa', 'LoginController@authenticate');
+Route::post('/login', 'LoginController@authenticate');
 
-Route::post('/login/token', 'LoginController@token');
+Route::middleware('logout')->post('/logout', 'LogoutController@logout');
+
+Route::post('/token', 'LoginController@token');
 
 
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get(
+    '/user', function (Request $request) {
     return $request->user();
-});
+}
+);

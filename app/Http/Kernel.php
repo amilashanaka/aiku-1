@@ -39,6 +39,14 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'logout'=>[
+
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            EnsureFrontendRequestsAreStateful::class,
+            'throttle:60,1',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class
+        ],
 
         'api' => [
            // \Spatie\Multitenancy\Http\Middleware\NeedsTenant::class,
