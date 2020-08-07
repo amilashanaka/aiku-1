@@ -10,7 +10,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 
-class Website extends Model {
+class StoreAggregation extends Model {
     use UsesTenantConnection;
 
     protected $casts = [
@@ -22,18 +22,4 @@ class Website extends Model {
     {
         return $this->belongsTo('App\Store');
     }
-
-    public function webpages()
-    {
-        return $this->hasMany('App\Webpage');
-    }
-
-
-    public function web_users()
-    {
-        return $this->hasMany('App\WebUser');
-    }
-
-   
-
 }

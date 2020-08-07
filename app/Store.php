@@ -43,7 +43,7 @@ class Store extends Model {
 
     public function websites()
     {
-        return $this->hasMany('App\Website');
+        return $this->hasOne('App\Website');
     }
 
     public function charges()
@@ -64,6 +64,11 @@ class Store extends Model {
     public function inmutable_products()
     {
         return $this->hasMany('App\InmutableProduct');
+    }
+
+    public function store_aggregations()
+    {
+        return $this->hasOne('App\StoreAggregation');
     }
 
     

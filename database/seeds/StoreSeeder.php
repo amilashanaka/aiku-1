@@ -53,6 +53,14 @@ class StoreSeeder extends Seeder
                     )
                 );
 
+                $store->store_aggregations()->saveMany(
+                    factory(App\StoreAggregation::class, 1)->make(
+                        [
+                            'tenant_id' => $store->tenant_id
+                        ]
+                    )
+                );
+
                 $store->products()->saveMany(
                     factory(App\Product::class, 5)->make(
                         [
@@ -110,6 +118,19 @@ class StoreSeeder extends Seeder
                                     'tenant_id' => $website->tenant_id
                                 ]
                             )
+                        )->each(
+                            function ($webpage) {
+        
+        
+                                $webpage->web_blocks()->saveMany(
+                                    factory(App\WebBlock::class, 10)->make(
+                                        [
+                                            'tenant_id' => $webpage->tenant_id
+                                        ]
+                                    )
+                                );
+        
+                            }
                         );
 
 
@@ -126,6 +147,7 @@ class StoreSeeder extends Seeder
 
                     }
                 );
+
 
 
                 $store->orders()->saveMany(
