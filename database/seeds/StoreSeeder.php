@@ -37,6 +37,14 @@ class StoreSeeder extends Seeder
                     )
                 );
 
+                $store->inmutable_addresses()->saveMany(
+                    factory(App\InmutableAddress::class, 5)->make(
+                        [
+                            'tenant_id' => $store->tenant_id
+                        ]
+                    )
+                );
+
                 $store->products()->saveMany(
                     factory(App\Product::class, 5)->make(
                         [
