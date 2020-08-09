@@ -10,7 +10,7 @@ Version 4
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Warehouse;
+use App\Models\Distribution\Warehouse;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 

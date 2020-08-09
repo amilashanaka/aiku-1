@@ -22,7 +22,7 @@ class EmployeeSeeder extends Seeder {
         $tenant = app('currentTenant');
 
 
-        factory(App\Employee::class, rand(10, 20))->create(
+        factory(App\Models\HR\Employee::class, rand(10, 20))->create(
             [
                 'tenant_id' => $tenant->id,
             ]

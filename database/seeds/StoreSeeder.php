@@ -10,18 +10,16 @@ Version 4
 
 use Illuminate\Database\Seeder;
 
-class StoreSeeder extends Seeder
-{
+class StoreSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         $tenant = app('currentTenant');
 
-        factory(App\Store::class, rand(2, 3))->create(
+        factory(App\Models\Stores\Store::class, rand(2, 3))->create(
             [
                 'tenant_id' => $tenant->id,
             ]
@@ -30,31 +28,7 @@ class StoreSeeder extends Seeder
 
 
                 $store->prospects()->saveMany(
-                    factory(App\Prospect::class, 5)->make(
-                        [
-                            'tenant_id' => $store->tenant_id
-                        ]
-                    )
-                );
-
-                $store->inmutable_addresses()->saveMany(
-                    factory(App\InmutableAddress::class, 5)->make(
-                        [
-                            'tenant_id' => $store->tenant_id
-                        ]
-                    )
-                );
-
-                $store->inmutable_products()->saveMany(
-                    factory(App\InmutableProduct::class, 5)->make(
-                        [
-                            'tenant_id' => $store->tenant_id
-                        ]
-                    )
-                );
-
-                $store->store_aggregations()->saveMany(
-                    factory(App\StoreAggregation::class, 1)->make(
+                    factory(App\Models\CRM\Prospect::class, 5)->make(
                         [
                             'tenant_id' => $store->tenant_id
                         ]
@@ -62,30 +36,27 @@ class StoreSeeder extends Seeder
                 );
 
                 $store->products()->saveMany(
-                    factory(App\Product::class, 5)->make(
+                    factory(App\Models\Stores\Product::class, 5)->make(
                         [
                             'tenant_id' => $store->tenant_id
                         ]
                     )
                 )->each(
                     function ($product) {
-
-
                         $product->parts()->saveMany(
-                            factory(App\Part::class, 10)->make(
+                            factory(App\Models\Distribution\Part::class, 1)->make(
                                 [
                                     'tenant_id' => $product->tenant_id
                                 ]
                             )
                         );
- 
+
                     }
                 );
 
 
-               
                 $store->charges()->saveMany(
-                    factory(App\Charge::class, 5)->make(
+                    factory(App\Models\Sales\Charge::class, 5)->make(
                         [
                             'tenant_id' => $store->tenant_id
                         ]
@@ -94,7 +65,7 @@ class StoreSeeder extends Seeder
 
 
                 $store->customers()->saveMany(
-                    factory(App\Customer::class, 100)->make(
+                    factory(App\Models\CRM\Customer::class, 100)->make(
                         [
                             'tenant_id' => $store->tenant_id
                         ]
@@ -103,7 +74,7 @@ class StoreSeeder extends Seeder
 
 
                 $store->websites()->saveMany(
-                    factory(App\Website::class, 1)->make(
+                    factory(App\Models\ECommerce\Website::class, 1)->make(
                         [
                             'tenant_id' => $store->tenant_id
                         ]
@@ -113,45 +84,42 @@ class StoreSeeder extends Seeder
 
 
                         $website->webpages()->saveMany(
-                            factory(App\Webpage::class, 10)->make(
+                            factory(App\Models\ECommerce\Webpage::class, 10)->make(
                                 [
                                     'tenant_id' => $website->tenant_id
                                 ]
                             )
                         )->each(
                             function ($webpage) {
-        
-        
+
+
                                 $webpage->web_blocks()->saveMany(
-                                    factory(App\WebBlock::class, 10)->make(
+                                    factory(App\Models\ECommerce\WebBlock::class, 10)->make(
                                         [
                                             'tenant_id' => $webpage->tenant_id
                                         ]
                                     )
                                 );
-        
+
                             }
                         );
 
 
-
                         $website->web_users()->saveMany(
-                            factory(App\WebUser::class, 10)->make(
+                            factory(App\Models\ECommerce\WebUser::class, 10)->make(
                                 [
                                     'tenant_id' => $website->tenant_id
                                 ]
                             )
                         );
-                        
-                        
+
 
                     }
                 );
 
 
-
                 $store->orders()->saveMany(
-                    factory(App\Order::class, 5)->make(
+                    factory(App\Models\Sales\Order::class, 5)->make(
                         [
                             'tenant_id' => $store->tenant_id
                         ]
@@ -161,7 +129,7 @@ class StoreSeeder extends Seeder
 
 
                         $order->invoice()->saveMany(
-                            factory(App\Invoice::class, 1)->make(
+                            factory(App\Models\Sales\Invoice::class, 1)->make(
                                 [
                                     'tenant_id' => $order->tenant_id
                                 ]
@@ -169,7 +137,7 @@ class StoreSeeder extends Seeder
                         );
 
                         $order->delivery_notes()->saveMany(
-                            factory(App\DeliveryNote::class, 5)->make(
+                            factory(App\Models\Distribution\DeliveryNote::class, 5)->make(
                                 [
                                     'tenant_id' => $order->tenant_id
                                 ]
@@ -189,5 +157,4 @@ class StoreSeeder extends Seeder
     }
 
 
-    
 }

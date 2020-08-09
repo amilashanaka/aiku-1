@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Sales\Order;
+use App\Models\Helpers\ImmutableAddress;
 use Faker\Generator as Faker;
 
-$factory->define(Order::class, function (Faker $faker,$args) {
+$factory->define(ImmutableAddress::class, function (Faker $faker,$args ){
     $name = $faker->word;
 
     return [

@@ -10,8 +10,7 @@ Version 4
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Employee;
-use Illuminate\Support\Str;
+use App\Models\HR\Employee;
 use Faker\Generator as Faker;
 
 

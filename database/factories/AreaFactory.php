@@ -10,15 +10,13 @@ Version 4
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\WarehouseArea;
+use App\Models\Distribution\WarehouseArea;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
 
 $factory->define(
-    WarehouseArea::class, function (Faker $faker,$tenant_id) {
-
-
+    WarehouseArea::class, function (Faker $faker, $tenant_id) {
 
 
     $name = $faker->word;

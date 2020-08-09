@@ -12,10 +12,10 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 
+
 /**
  * App\Models\HR\ClockingMachine
  *
- * @method static where(string $string, $device_name)
  * @method static Builder|ClockingMachine findSimilarSlugs($attribute, $config, $slug)
  * @method static Builder|ClockingMachine newModelQuery()
  * @method static Builder|ClockingMachine newQuery()

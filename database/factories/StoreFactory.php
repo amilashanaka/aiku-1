@@ -2,12 +2,12 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Store;
+use App\Models\Stores\Store;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
 $factory->define(Store::class, function (Faker $faker,$tenant_id) {
-   
+
     $name = $faker->word;
 
     return [

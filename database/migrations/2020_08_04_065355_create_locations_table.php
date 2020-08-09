@@ -17,6 +17,7 @@ class CreateLocationsTable extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->mediumIncrements('id');
             $table->unsignedSmallInteger('tenant_id');
+            $table->unsignedMediumInteger('warehouse_id');
             $table->unsignedMediumInteger('warehouse_area_id');
             $table->string('slug');
             $table->json('settings')->default(new Expression('(JSON_ARRAY())'));

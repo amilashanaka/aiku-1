@@ -10,7 +10,7 @@ Version 4
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Location;
+use App\Models\Distribution\Location;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -25,7 +25,7 @@ $factory->define(
 
     return [
         'tenant_id' => $args['tenant_id'],
-     
+
         'slug'      => Str::slug($name),
 
     ];
