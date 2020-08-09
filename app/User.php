@@ -8,8 +8,8 @@ Version 4
 */
 
 namespace App;
-use App\Events\UserHandleChanged;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -23,11 +23,12 @@ use Illuminate\Notifications\Notifiable;
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
+ * @method static Builder|User newModelQuery()
+ * @method static Builder|User newQuery()
+ * @method static Builder|User query()
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $userable
+ * @method static Builder|User findSimilarSlugs($attribute, $config, $slug)
  */
 class User extends Authenticatable
 {
