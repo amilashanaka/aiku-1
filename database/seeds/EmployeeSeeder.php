@@ -26,6 +26,21 @@ class EmployeeSeeder extends Seeder {
             [
                 'tenant_id' => $tenant->id,
             ]
+        )->each(
+            function ($employee) {
+
+                if($employee->id==1){
+                    $employee->user->assignRole('super-system-admin');
+                }elseif($employee->id==2){
+                    $employee->user->assignRole('system-admin');
+                }elseif($employee->id==3){
+                    $employee->user->assignRole('human-resources-admin');
+                }elseif($employee->id==4){
+                    $employee->user->assignRole('human-resources-clerk');
+                }
+
+
+            }
         );
 
     }

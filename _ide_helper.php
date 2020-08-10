@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.22.4 on 2020-08-03 04:41:48.
+ * Generated for Laravel 7.22.4 on 2020-08-09 14:31:07.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -15648,6 +15648,85 @@ namespace Facade\Ignition\Facades {
  
 }
 
+namespace Galahad\LaravelAddressing\Support\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Addressing {
+        
+        /**
+         * Get a country by 2-letter ISO code.
+         *
+         * @todo The locale parameter isn't always applied
+         * @param string $country_code
+         * @param string|null $locale
+         * @return \Galahad\LaravelAddressing\Entity\Country 
+         * @static 
+         */ 
+        public static function country($country_code, $locale = null)
+        {
+                        /** @var \Galahad\LaravelAddressing\LaravelAddressing $instance */
+                        return $instance->country($country_code, $locale);
+        }
+        
+        /**
+         * Get all countries as a collection.
+         *
+         * @todo The locale parameter is only applied the first time
+         * @param string|null $locale
+         * @return \Galahad\LaravelAddressing\Collection\CountryCollection 
+         * @static 
+         */ 
+        public static function countries($locale = null)
+        {
+                        /** @var \Galahad\LaravelAddressing\LaravelAddressing $instance */
+                        return $instance->countries($locale);
+        }
+        
+        /**
+         * Load a country by its full name.
+         *
+         * @param string $name
+         * @return \Galahad\LaravelAddressing\Entity\Country|null 
+         * @static 
+         */ 
+        public static function countryByName($name)
+        {
+                        /** @var \Galahad\LaravelAddressing\LaravelAddressing $instance */
+                        return $instance->countryByName($name);
+        }
+        
+        /**
+         * Find a country, either by code or by name.
+         *
+         * @param string $input
+         * @return \Galahad\LaravelAddressing\Entity\Country|null 
+         * @static 
+         */ 
+        public static function findCountry($input)
+        {
+                        /** @var \Galahad\LaravelAddressing\LaravelAddressing $instance */
+                        return $instance->findCountry($input);
+        }
+         
+    }
+ 
+}
+
+namespace Nuwave\Lighthouse { 
+
+    /**
+     * 
+     *
+     */ 
+    class GraphQL {
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -18600,6 +18679,10 @@ namespace  {
     class View extends \Illuminate\Support\Facades\View {}
 
     class Flare extends \Facade\Ignition\Facades\Flare {}
+
+    class Addressing extends \Galahad\LaravelAddressing\Support\Facades\Addressing {}
+
+    class graphql extends \Nuwave\Lighthouse\GraphQL {}
  
 }
 

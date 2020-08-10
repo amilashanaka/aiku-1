@@ -15,6 +15,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * App\User
@@ -33,6 +34,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasApiTokens,Notifiable,UsesTenantConnection,Sluggable;
+    use HasRoles;
 
     protected $casts = [
         'settings' => 'array',

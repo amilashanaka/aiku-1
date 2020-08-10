@@ -19,6 +19,7 @@ use Spatie\Multitenancy\Models\Tenant as Tenanto;
 use Spatie\Multitenancy\TenantCollection;
 
 
+
 /**
  * App\Tenant
  *
@@ -54,25 +55,25 @@ class Tenant extends Tenanto {
         'data'     => 'array'
     ];
 
+    protected static function booted() {
+        static::created(
+            function () {
 
-    public static function booted() {
-        static::created(fn(Tenant $model) => $model->post_creation_actions());
+                if (ctype_alpha($this->database) or ctype_lower($this->database)) {
+                    throw new Exception('Invalid database name');
+                }
+
+                DB::connection('scaffolding')->statement("DROP DATABASE IF EXISTS " . $this->database);
+                DB::connection('scaffolding')->statement("CREATE DATABASE IF NOT EXISTS " . $this->database);
+                Artisan::call('tenants:artisan "migrate --database=tenant" --tenant='.$this->id );
+
+
+
+
+            }
+        );
     }
 
-    /**
-     * @throws \Exception
-     */
-    public function post_creation_actions() {
-
-        if (ctype_alpha($this->database) or ctype_lower($this->database)) {
-            throw new Exception('Invalid database name');
-        }
-
-        DB::connection('scaffolding')->statement("DROP DATABASE IF EXISTS " . $this->database);
-        DB::connection('scaffolding')->statement("CREATE DATABASE IF NOT EXISTS " . $this->database);
-        Artisan::call('tenants:artisan "migrate --database=tenant" --tenant='.$this->id );
-
-    }
 
     public function agents() {
         return $this->belongsToMany('App\Models\Suppliers\Agent')->withTimestamps();
@@ -81,4 +82,6 @@ class Tenant extends Tenanto {
     public function supplier_owner() {
         return $this->morphOne('App\Models\Suppliers\Supplier', 'owner');
     }
+
+
 }
