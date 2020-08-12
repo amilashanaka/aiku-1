@@ -4,8 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-Route::post('/login', 'LoginController@authenticate');
-Route::middleware('logout')->post('/logout', 'LogoutController@logout');
+Route::post('/login', 'ApiLoginController@authenticate');
+Route::middleware('logout')->post('/logout', 'ApiLogoutController@logout');
 Route::post('/token', 'ApiTokenController@authenticate');
 
 

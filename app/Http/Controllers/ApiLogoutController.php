@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 
-class LogoutController extends Controller {
+class ApiLogoutController extends Controller {
 
     use AuthenticatesUsers;
 

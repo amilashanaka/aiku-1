@@ -41,6 +41,8 @@ class User extends Authenticatable
         'data'     => 'array'
     ];
 
+    protected $hidden = ['password'];
+
     public function sluggable()
     {
         return [

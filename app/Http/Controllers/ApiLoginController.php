@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 
-class LoginController extends Controller {
+class ApiLoginController extends Controller {
 
 
     /**
@@ -27,7 +27,13 @@ class LoginController extends Controller {
 
 
         if (Auth::attempt($credentials)) {
-            return response()->json(['token' => 'yy',]);
+            return response()->json(
+                [
+                    'user' => Auth::user(),
+                    'permissions' => Auth::user()->getAllPermissions(),
+                    'userable'=>Auth::user()->userable
+                ]
+            );
         } else {
             throw ValidationException::withMessages(
                 [
