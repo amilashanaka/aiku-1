@@ -22,7 +22,8 @@
         "nuwave/lighthouse": "^4.16",
         "sentry/sentry-laravel": "^1.8",
         "spatie/laravel-multitenancy": "^1.0",
-        "spatie/laravel-permission": "^3.13"
+        "spatie/laravel-permission": "^3.13",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.7",
