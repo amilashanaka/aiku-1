@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "nuwave/lighthouse": "^4.16",
+        "sentry/sentry-laravel": "^1.8",
         "spatie/laravel-multitenancy": "^1.0",
         "spatie/laravel-permission": "^3.13"
     },
