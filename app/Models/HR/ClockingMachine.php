@@ -35,8 +35,13 @@ class ClockingMachine extends Model {
         ];
     }
 
-    protected $casts = [
+        protected $casts = [
         'settings' => 'array',
         'data'     => 'array'
+    ];
+
+    protected $attributes = [
+        'data' => '{}',
+        'settings' => '{}'
     ];
 }

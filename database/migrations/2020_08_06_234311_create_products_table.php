@@ -4,7 +4,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Query\Expression;
+
 
 class CreateProductsTable extends Migration
 {
@@ -21,9 +21,9 @@ class CreateProductsTable extends Migration
             $table->unsignedMediumInteger('store_id');
             $table->foreign('store_id')->references('id')->on('stores');
             $table->string('slug');
-            $table->json('settings')->default(new Expression('(JSON_ARRAY())'));
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
-            $table->timestamps();
+            $table->json('settings');
+            $table->json('data');
+            $table->timestampsTz();
             $table->unsignedMediumInteger('legacy_id')->nullable();
             $table->index(['tenant_id', 'slug']);
         });

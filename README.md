@@ -1,6 +1,10 @@
 #### Multi tenancy
 
-##### Landlord database migrations and seedngs (only for master)
+
+CREATE DATABASE master ENCODING 'UTF8' LC_COLLATE = 'en_GB.UTF-8' LC_CTYPE = 'en_GB.UTF-8' TEMPLATE template0 ;
+CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;
+
+##### Landlord database migrations and seeding (only for master)
 `art migrate --path=database/migrations/landlord --database=landlord`
 
 `art db:seed` 

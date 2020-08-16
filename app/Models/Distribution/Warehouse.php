@@ -21,9 +21,14 @@ class Warehouse extends Model {
 
     use UsesTenantConnection;
 
-    protected $casts = [
+        protected $casts = [
         'settings' => 'array',
         'data'     => 'array'
+    ];
+
+    protected $attributes = [
+        'data' => '{}',
+        'settings' => '{}'
     ];
 
     public function areas() {

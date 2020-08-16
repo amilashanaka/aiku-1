@@ -18,7 +18,7 @@ class CreateContractorsTable extends Migration
             $table->enum('status',['Working','NotWorking'])->default('Working');
             $table->string('slug')->unique();
             $table->string('name');
-            $table->timestamps();
+            $table->timestampsTz();
             $table->index('status');
         });
     }

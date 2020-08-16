@@ -9,7 +9,7 @@ Version 4
 
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Query\Expression;
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -28,8 +28,8 @@ class CreateTimesheetsTable extends Migration
             $table->unsignedSmallInteger('dates');
             $table->date('date');
             $table->enum('status',['Working','Holiday','SickDay'])->default('Working');
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
-            $table->timestamps();
+            $table->json('data');
+            $table->timestampsTz();
             $table->unsignedMediumInteger('legacy_id')->nullable();
             $table->index(['employee_id', 'date']);
             $table->index('status');

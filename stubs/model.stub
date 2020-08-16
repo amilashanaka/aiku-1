@@ -17,4 +17,9 @@ class {{ class }} extends Model {
         'settings' => 'array',
         'data'     => 'array'
     ];
+
+    protected $attributes = [
+        'data' => '{}',
+        'settings' => '{}'
+    ];
 }

@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Query\Expression;
 
 class CreateWarehousesTable extends Migration
 {
@@ -19,9 +18,9 @@ class CreateWarehousesTable extends Migration
             $table->unsignedSmallInteger('tenant_id');
             $table->string('slug');
             $table->string('name');
-            $table->json('settings')->default(new Expression('(JSON_ARRAY())'));
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
-            $table->timestamps();
+            $table->json('settings');
+            $table->json('data');
+            $table->timestampsTz();
             $table->unsignedMediumInteger('legacy_id')->nullable();
             $table->index(['tenant_id', 'slug']);
         });

@@ -36,9 +36,15 @@ class User extends Authenticatable
     use HasApiTokens,Notifiable,UsesTenantConnection,Sluggable;
     use HasRoles;
 
-    protected $casts = [
+        protected $casts = [
         'settings' => 'array',
         'data'     => 'array'
+    ];
+
+
+    protected $attributes = [
+        'data' => '{}',
+        'settings' => '{}'
     ];
 
     protected $hidden = ['password'];

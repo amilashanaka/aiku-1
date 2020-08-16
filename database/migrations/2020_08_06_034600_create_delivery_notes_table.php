@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Query\Expression;
+
 
 class CreateDeliveryNotesTable extends Migration
 {
@@ -20,9 +20,9 @@ class CreateDeliveryNotesTable extends Migration
             $table->unsignedMediumInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
             $table->string('slug');
-            $table->json('settings')->default(new Expression('(JSON_ARRAY())'));
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
-            $table->timestamps();
+            $table->json('settings');
+            $table->json('data');
+            $table->timestampsTz();
             $table->unsignedMediumInteger('legacy_id')->nullable();
             $table->index(['tenant_id', 'slug']);
         });

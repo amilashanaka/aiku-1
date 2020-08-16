@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Query\Expression;
 
 class CreateLandlordTenantsTable extends Migration
 {
@@ -14,9 +13,9 @@ class CreateLandlordTenantsTable extends Migration
             $table->string('name');
             $table->string('subdomain')->unique();
             $table->string('database')->unique();
-            $table->json('settings')->default(new Expression('(JSON_ARRAY())'));
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
-            $table->timestamps();
+            $table->json('settings');
+            $table->json('data');
+            $table->timestampsTz();
         });
     }
 

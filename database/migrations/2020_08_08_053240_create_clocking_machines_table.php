@@ -16,7 +16,7 @@ class CreateClockingMachinesTable extends Migration {
             $table->id();
             $table->string('slug')->unique();
             $table->string('name')->index();
-            $table->timestamps();
+            $table->timestampsTz();
         }
         );
     }

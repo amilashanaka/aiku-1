@@ -9,7 +9,7 @@ Version 4
 
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Query\Expression;
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -28,8 +28,8 @@ class CreateDatesTable extends Migration
             $table->date('date')->unique();
             $table->string('holiday');
             $table->boolean('working');
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
-            $table->timestamps();
+            $table->json('data');
+            $table->timestampsTz();
         });
     }
 

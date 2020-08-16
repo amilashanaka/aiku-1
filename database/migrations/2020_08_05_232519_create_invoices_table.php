@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Query\Expression;
+
 
 class CreateInvoicesTable extends Migration
 {
@@ -18,12 +18,12 @@ class CreateInvoicesTable extends Migration
             $table->mediumIncrements('id');
             $table->unsignedSmallInteger('tenant_id');
             $table->unsignedMediumInteger('order_id');
-            
-           
+
+
             $table->string('slug');
-            $table->json('settings')->default(new Expression('(JSON_ARRAY())'));
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
-            $table->timestamps();
+            $table->json('settings');
+            $table->json('data');
+            $table->timestampsTz();
             $table->unsignedMediumInteger('legacy_id')->nullable();
             $table->index(['tenant_id', 'slug']);
         });

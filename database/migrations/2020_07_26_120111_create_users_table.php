@@ -11,7 +11,7 @@ Version 4
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Query\Expression;
+
 
 
 class CreateUsersTable extends Migration {
@@ -41,9 +41,13 @@ class CreateUsersTable extends Migration {
             $table->string('userable_type');
             $table->unsignedMediumInteger('userable_id');
 
-            $table->json('settings')->default(new Expression('(JSON_ARRAY())'));
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
-            $table->timestamps();
+            $table->json('settings');
+            $table->json('data');
+
+            $table->timestampTZ('last_login_at')->nullable();
+            $table->timestampTZ('last_login_fail_at')->nullable();
+
+            $table->timestampsTz();
             $table->unsignedMediumInteger('legacy_id')->nullable();
             $table->index(
                 [

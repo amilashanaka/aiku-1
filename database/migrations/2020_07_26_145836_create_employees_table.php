@@ -11,7 +11,7 @@ Version 4
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Query\Expression;
+
 
 class CreateEmployeesTable extends Migration
 {
@@ -25,14 +25,14 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->mediumIncrements('id');
             $table->unsignedSmallInteger('tenant_id');
-            $table->unsignedSmallInteger('position_id')->index();
+            $table->unsignedSmallInteger('position_id')->nullable()->index();
 
             $table->enum('status',['Working','NotWorking'])->default('Working');
             $table->string('slug')->nullable()->unique();
             $table->string('name');
-            $table->json('settings')->default(new Expression('(JSON_ARRAY())'));
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
-            $table->timestamps();
+            $table->json('settings');
+            $table->json('data');
+            $table->timestampsTz();
             $table->unsignedMediumInteger('legacy_id')->nullable();
             $table->index(['tenant_id', 'slug']);
             $table->index('status');

@@ -43,9 +43,14 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  */
 class Agent extends Model {
-    protected $casts = [
+        protected $casts = [
         'settings' => 'array',
         'data'     => 'array'
+    ];
+
+    protected $attributes = [
+        'data' => '{}',
+        'settings' => '{}'
     ];
 
     public function tenants() {

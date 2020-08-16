@@ -9,7 +9,7 @@ Version 4
 
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Query\Expression;
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -27,9 +27,9 @@ class CreateTimesheetRecordsTable extends Migration
             $table->unsignedMediumInteger('timesheet_id');
             $table->dateTimeTz('date')->unique();
             $table->string('state');
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->json('data');
             $table->unsignedMediumInteger('legacy_id')->nullable();
-            $table->timestamps();
+            $table->timestampsTz();
         });
     }
 

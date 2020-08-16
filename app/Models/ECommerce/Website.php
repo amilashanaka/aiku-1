@@ -28,9 +28,14 @@ use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 class Website extends Model {
     use UsesTenantConnection;
 
-    protected $casts = [
+        protected $casts = [
         'settings' => 'array',
         'data'     => 'array'
+    ];
+
+    protected $attributes = [
+        'data' => '{}',
+        'settings' => '{}'
     ];
 
     public function store() {

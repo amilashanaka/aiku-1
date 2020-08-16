@@ -33,9 +33,14 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Employee extends Model {
     use UsesTenantConnection, Sluggable;
 
-    protected $casts = [
+        protected $casts = [
         'settings' => 'array',
         'data'     => 'array'
+    ];
+
+    protected $attributes = [
+        'data' => '{}',
+        'settings' => '{}'
     ];
 
     public function sluggable() {
@@ -64,7 +69,7 @@ class Employee extends Model {
                     [
                         'handle'    => Str::slug($employee->name),
                         'tenant_id' => $employee->tenant_id,
-                        'password'  => (env('APP_ENV', 'production') == 'local' ? Hash::make('password') : Hash::make(Str::random(40))),
+                        'password'  => (env('APP_ENV', 'production') == 'devel' ? Hash::make('password') : Hash::make(Str::random(40))),
                         'legacy_id' => $employee->legacy_id,
                         //'userable_type' => 'App\Employee',
                         //'userable_id'   => $employee->id,
