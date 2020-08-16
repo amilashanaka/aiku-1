@@ -1,5 +1,16 @@
 <?php
 
+use GraphQL\Error\Debug;
+use GraphQL\Validator\Rules\DisableIntrospection;
+use GraphQL\Validator\Rules\QueryComplexity;
+use GraphQL\Validator\Rules\QueryDepth;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
+use Nuwave\Lighthouse\Execution\ExtensionErrorHandler;
+use Nuwave\Lighthouse\Execution\ReportingErrorHandler;
+use Nuwave\Lighthouse\Subscriptions\SubscriptionRouter;
+use Nuwave\Lighthouse\Support\Http\Middleware\AcceptJson;
+use Nuwave\Lighthouse\Support\Http\Middleware\AttemptAuthentication;
+
 return [
 
     /*
@@ -15,14 +26,14 @@ return [
 
     'route' => [
         /*
-         * The URI the endpoint responds to, e.g. mydomain.com/graphql.
+         * The URI the endpoint responds to, e.g. my-domain.com/graphql.
          */
-        'uri' => '/graphql',
+        'uri'        => '/graphql',
 
         /*
          * Lighthouse creates a named route for convenient URL generation and redirects.
          */
-        'name' => 'graphql',
+        'name'       => 'graphql',
 
         /*
          * Beware that middleware defined here runs before the GraphQL execution phase,
@@ -31,17 +42,16 @@ return [
         'middleware' => [
 
 
+            AcceptJson::class,
 
-            \Nuwave\Lighthouse\Support\Http\Middleware\AcceptJson::class,
+            EnsureFrontendRequestsAreStateful::class,
 
-            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-
-            'auth:sanctum',
+            //'auth:sanctum',
 
 
-            // Logs in a user if they are authenticated. In contrast to Laravel's 'auth'
+            // Logs in a user if they are authenticated. In contrast to Laravel 'auth'
             // middleware, this delegates auth and permission checks to the field level.
-            \Nuwave\Lighthouse\Support\Http\Middleware\AttemptAuthentication::class,
+            AttemptAuthentication::class,
 
             // Logs every incoming GraphQL query.
             // \Nuwave\Lighthouse\Support\Http\Middleware\LogGraphQLQueries::class,
@@ -102,17 +112,17 @@ return [
         /*
          * The name of the cache item for the schema cache.
          */
-        'key' => env('LIGHTHOUSE_CACHE_KEY', 'lighthouse-schema'),
+        'key'    => env('LIGHTHOUSE_CACHE_KEY', 'lighthouse-schema'),
 
         /*
          * Allows using a specific cache store, uses the app's default if set to null.
          */
-        'store' => env('LIGHTHOUSE_CACHE_STORE', null),
+        'store'  => env('LIGHTHOUSE_CACHE_STORE', null),
 
         /**
          * Duration in seconds the schema should remain cached, null means forever.
          */
-        'ttl' => env('LIGHTHOUSE_CACHE_TTL', null),
+        'ttl'    => env('LIGHTHOUSE_CACHE_TTL', null),
     ],
 
     /*
@@ -127,14 +137,28 @@ return [
     */
 
     'namespaces' => [
-        'models' => ['App', 'App\\Models'],
-        'queries' => 'App\\GraphQL\\Queries',
-        'mutations' => 'App\\GraphQL\\Mutations',
+        'models'        => [
+            'App',
+            'App\\Models',
+            'App\\Models\\Accounting',
+            'App\\Models\\CRM',
+            'App\\Models\\Distribution',
+            'App\\Models\\ECommerce',
+            'App\\Models\\Helpers',
+            'App\\Models\\HR',
+            'App\\Models\\Procurement',
+            'App\\Models\\Sales',
+            'App\\Models\\Stores',
+            'App\\Models\\Suppliers',
+
+        ],
+        'queries'       => 'App\\GraphQL\\Queries',
+        'mutations'     => 'App\\GraphQL\\Mutations',
         'subscriptions' => 'App\\GraphQL\\Subscriptions',
-        'interfaces' => 'App\\GraphQL\\Interfaces',
-        'unions' => 'App\\GraphQL\\Unions',
-        'scalars' => 'App\\GraphQL\\Scalars',
-        'directives' => ['App\\GraphQL\\Directives'],
+        'interfaces'    => 'App\\GraphQL\\Interfaces',
+        'unions'        => 'App\\GraphQL\\Unions',
+        'scalars'       => 'App\\GraphQL\\Scalars',
+        'directives'    => ['App\\GraphQL\\Directives'],
     ],
 
     /*
@@ -148,9 +172,9 @@ return [
     */
 
     'security' => [
-        'max_query_complexity' => \GraphQL\Validator\Rules\QueryComplexity::DISABLED,
-        'max_query_depth' => \GraphQL\Validator\Rules\QueryDepth::DISABLED,
-        'disable_introspection' => \GraphQL\Validator\Rules\DisableIntrospection::DISABLED,
+        'max_query_complexity'  => QueryComplexity::DISABLED,
+        'max_query_depth'       => QueryDepth::DISABLED,
+        'disable_introspection' => DisableIntrospection::DISABLED,
     ],
 
     /*
@@ -174,7 +198,7 @@ return [
          * Limit the maximum amount of items that clients can request from paginated lists.
          * Setting this to `null` means the count is unrestricted.
          */
-        'max_count' => null,
+        'max_count'     => null,
     ],
 
     /*
@@ -216,7 +240,7 @@ return [
     |
     */
 
-    'debug' => \GraphQL\Error\Debug::INCLUDE_DEBUG_MESSAGE | \GraphQL\Error\Debug::INCLUDE_TRACE,
+    'debug' => Debug::INCLUDE_DEBUG_MESSAGE | Debug::INCLUDE_TRACE,
 
     /*
     |--------------------------------------------------------------------------
@@ -230,8 +254,8 @@ return [
     */
 
     'error_handlers' => [
-        \Nuwave\Lighthouse\Execution\ExtensionErrorHandler::class,
-        \Nuwave\Lighthouse\Execution\ReportingErrorHandler::class,
+        ExtensionErrorHandler::class,
+        ReportingErrorHandler::class,
     ],
 
     /*
@@ -287,7 +311,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Batchload Relations
+    | Batch-oad Relations
     |--------------------------------------------------------------------------
     |
     | If set to true, relations marked with directives like @hasMany or @belongsTo
@@ -311,7 +335,7 @@ return [
         /*
          * Determines if broadcasts should be queued by default.
          */
-        'queue_broadcasts' => env('LIGHTHOUSE_QUEUE_BROADCASTS', true),
+        'queue_broadcasts'      => env('LIGHTHOUSE_QUEUE_BROADCASTS', true),
 
         /*
          * Determines the queue to use for broadcasting queue jobs.
@@ -323,7 +347,7 @@ return [
          *
          * Any Laravel supported cache driver options are available here.
          */
-        'storage' => env('LIGHTHOUSE_SUBSCRIPTION_STORAGE', 'redis'),
+        'storage'               => env('LIGHTHOUSE_SUBSCRIPTION_STORAGE', 'redis'),
 
         /*
          * Default subscription storage time to live in seconds.
@@ -332,23 +356,23 @@ return [
          * Setting this to `null` means the subscriptions are stored forever. This may cause
          * stale subscriptions to linger indefinitely in case cleanup fails for any reason.
          */
-        'storage_ttl' => env('LIGHTHOUSE_SUBSCRIPTION_STORAGE_TTL', null),
+        'storage_ttl'           => env('LIGHTHOUSE_SUBSCRIPTION_STORAGE_TTL', null),
 
         /*
          * Default subscription broadcaster.
          */
-        'broadcaster' => env('LIGHTHOUSE_BROADCASTER', 'pusher'),
+        'broadcaster'           => env('LIGHTHOUSE_BROADCASTER', 'pusher'),
 
         /*
          * Subscription broadcasting drivers with config options.
          */
-        'broadcasters' => [
-            'log' => [
+        'broadcasters'          => [
+            'log'    => [
                 'driver' => 'log',
             ],
             'pusher' => [
-                'driver' => 'pusher',
-                'routes' => \Nuwave\Lighthouse\Subscriptions\SubscriptionRouter::class.'@pusher',
+                'driver'     => 'pusher',
+                'routes'     => SubscriptionRouter::class.'@pusher',
                 'connection' => 'pusher',
             ],
         ],
@@ -376,7 +400,7 @@ return [
          * Once reached, remaining fields will be resolved synchronously.
          * 0 means unlimited.
          */
-        'max_execution_ms' => 0,
+        'max_execution_ms'  => 0,
     ],
 
 ];

@@ -2,11 +2,13 @@
 
 ##### Landlord database migrations and seedngs (only for master)
 `art migrate --path=database/migrations/landlord --database=landlord`
+
 `art db:seed` 
 
 
 ##### Tenants database migrations and seddings (for the teneants databses)
-`art tenants:artisan "migrate --database=tenant"` 
+`art tenants:artisan "migrate --database=tenant"`
+ 
 `art tenants:artisan "migrate --database=tenant --seed"` 
 
 

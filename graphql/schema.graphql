@@ -5,18 +5,14 @@ scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
 type Query {
-    tenants: [Tenant!]! @paginate(defaultCount: 10)
+    tenants: [Tenant!]! @paginate(defaultCount: 100)
     tenant(id: ID @eq): Tenant @find
 
-    users: [User!]! @paginate(defaultCount: 10)
+    users: [User!]! @paginate(defaultCount: 100)
     user(id: ID @eq): User @find
-}
 
-type User {
-    id: ID!
-    handle: String!
-    created_at: DateTime!
-    updated_at: DateTime!
+    employee(id: ID @eq): Employee @find
+
 }
 
 type Tenant {
@@ -24,4 +20,36 @@ type Tenant {
     name: String!
     created_at: DateTime!
     updated_at: DateTime!
+}
+
+union Userable = Employee | Contractor
+
+
+type User {
+    id: ID!
+    handle: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+    userable : Userable! @morphTo
+
+}
+
+type Employee {
+    id: ID!
+    slug: String!
+    name: String!
+    status: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+    user: User! @morphOne
+}
+
+type Contractor {
+    id: ID!
+    slug: String!
+    name: String!
+    status: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+    user: User! @morphOne
 }
