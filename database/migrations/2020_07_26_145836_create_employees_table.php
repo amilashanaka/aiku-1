@@ -25,6 +25,8 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->mediumIncrements('id');
             $table->unsignedSmallInteger('tenant_id');
+            $table->unsignedSmallInteger('position_id')->index();
+
             $table->enum('status',['Working','NotWorking'])->default('Working');
             $table->string('slug')->nullable()->unique();
             $table->string('name');

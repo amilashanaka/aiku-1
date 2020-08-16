@@ -57,15 +57,15 @@ class Tenant extends Tenanto {
 
     protected static function booted() {
         static::created(
-            function () {
+            function ($tenant) {
 
-                if (ctype_alpha($this->database) or ctype_lower($this->database)) {
+                if (ctype_alpha($tenant->database) or ctype_lower($tenant->database)) {
                     throw new Exception('Invalid database name');
                 }
 
-                DB::connection('scaffolding')->statement("DROP DATABASE IF EXISTS " . $this->database);
-                DB::connection('scaffolding')->statement("CREATE DATABASE IF NOT EXISTS " . $this->database);
-                Artisan::call('tenants:artisan "migrate --database=tenant" --tenant='.$this->id );
+                DB::connection('scaffolding')->statement("DROP DATABASE IF EXISTS " . $tenant->database);
+                DB::connection('scaffolding')->statement("CREATE DATABASE IF NOT EXISTS " . $tenant->database);
+                Artisan::call('tenants:artisan "migrate --database=tenant" --tenant='.$tenant->id );
 
 
 
