@@ -1,7 +1,15 @@
 #### Multi tenancy
 
+We use PostgreSQL 12
+
+sudo apt update; sudo apt upgrade;
+
+Install timescale
+
+https://docs.timescale.com/latest/getting-started/installation/ubuntu/installation-apt-ubuntu
 
 CREATE DATABASE master ENCODING 'UTF8' LC_COLLATE = 'en_GB.UTF-8' LC_CTYPE = 'en_GB.UTF-8' TEMPLATE template0 ;
+
 CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;
 
 ##### Landlord database migrations and seeding (only for master)

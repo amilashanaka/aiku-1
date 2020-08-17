@@ -24,10 +24,9 @@ use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
  */
 class ClockingMachine extends Model {
 
-    use UsesTenantConnection,Sluggable;
+    use UsesTenantConnection, Sluggable;
 
-    public function sluggable()
-    {
+    public function sluggable() {
         return [
             'slug' => [
                 'source' => 'name'
@@ -35,13 +34,13 @@ class ClockingMachine extends Model {
         ];
     }
 
-        protected $casts = [
+    protected $casts = [
         'settings' => 'array',
         'data'     => 'array'
     ];
 
     protected $attributes = [
-        'data' => '{}',
+        'data'     => '{}',
         'settings' => '{}'
     ];
 }
