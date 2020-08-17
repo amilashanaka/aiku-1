@@ -24,6 +24,7 @@ class ApiLogoutController extends Controller {
     public function logout(Request $request) {
 
 
+        $user=Auth::user();
 
         $this->guard()->logout();
         $request->session()->invalidate();
@@ -33,14 +34,17 @@ class ApiLogoutController extends Controller {
             return $response;
         }
 
+
         DB::insert(
             'insert into user_auth_logs (time, handle,user_id,ip,action) values (current_timestamp, ?,?,?,?)', [
-                                                                                                                 Auth::user()->handle,
-                                                                                                                 Auth::user()->id,
+                                                                                                                 $user->handle,
+                                                                                                                 $user->id,
                                                                                                                  $request->ip(),
                                                                                                                  'logout'
                                                                                                              ]
         );
+
+
 
         return new Response('', 204);
     }

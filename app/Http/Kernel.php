@@ -40,15 +40,6 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             SubstituteBindings::class,
         ],
-        'logout'=>[
-
-            \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            EnsureFrontendRequestsAreStateful::class,
-            'throttle:60,1',
-            SubstituteBindings::class
-        ],
-
         'api' => [
 
             EnsureFrontendRequestsAreStateful::class,

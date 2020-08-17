@@ -46,7 +46,7 @@ return [
 
             EnsureFrontendRequestsAreStateful::class,
 
-            //'auth:sanctum',
+            'auth:sanctum',
 
 
             // Logs in a user if they are authenticated. In contrast to Laravel 'auth'

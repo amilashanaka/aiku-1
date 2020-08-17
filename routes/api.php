@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('/login', 'ApiLoginController@authenticate');
-Route::middleware('auth:sanctum')->post('/logout', 'ApiLogoutController@logout');
+Route::post('/logout', 'ApiLogoutController@logout');
 Route::post('/token', 'ApiTokenController@authenticate');
 
 
