@@ -19,7 +19,6 @@ use Spatie\Multitenancy\Models\Tenant as Tenanto;
 use Spatie\Multitenancy\TenantCollection;
 
 
-
 /**
  * App\Tenant
  *
@@ -72,17 +71,14 @@ class Tenant extends Tenanto {
                 DB::connection('scaffolding')->statement("CREATE DATABASE ".$tenant->database." ENCODING 'UTF8' LC_COLLATE = 'en_GB.UTF-8' LC_CTYPE = 'en_GB.UTF-8' TEMPLATE template0");
                 DB::connection('scaffolding')->statement("CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;");
 
-
-               // SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'TARGET_DB'  AND pid <> pg_backend_pid();
-
-                Artisan::call('tenants:artisan "migrate --database=tenant" --tenant='.$tenant->id );
-
-
+                Artisan::call('tenants:artisan "migrate:refresh --database=tenant" --tenant='.$tenant->id );
+                Artisan::call('tenants:artisan "db:seed --database=tenant --class=NewTenantSeeder" --tenant='.$tenant->id);
 
 
             }
         );
     }
+
 
 
     public function agents() {

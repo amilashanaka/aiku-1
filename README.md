@@ -18,7 +18,7 @@ CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;
 `art db:seed` 
 
 
-##### Tenants database migrations and seddings (for the teneants databses)
+##### Tenants database migrations and seeding (for the tenants databases)
 `art tenants:artisan "migrate --database=tenant"`
  
 `art tenants:artisan "migrate --database=tenant --seed"` 

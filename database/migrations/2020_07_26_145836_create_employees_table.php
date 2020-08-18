@@ -34,7 +34,6 @@ class CreateEmployeesTable extends Migration
             $table->json('data');
             $table->timestampsTz();
             $table->unsignedMediumInteger('legacy_id')->nullable();
-            $table->index(['tenant_id', 'slug']);
             $table->index('status');
         });
     }

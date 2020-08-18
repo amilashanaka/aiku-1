@@ -22,7 +22,7 @@ type Tenant {
     updated_at: DateTime!
 }
 
-union Userable = Employee | Contractor
+union Userable = Employee | Contractor | Admin
 
 
 type User {
@@ -49,6 +49,15 @@ type Contractor {
     slug: String!
     name: String!
     status: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+    user: User! @morphOne
+}
+
+type Admin {
+    id: ID!
+    slug: String!
+    name: String!
     created_at: DateTime!
     updated_at: DateTime!
     user: User! @morphOne

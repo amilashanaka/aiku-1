@@ -1,11 +1,13 @@
 <?php
 
+use App\Models\System\Admin;
 use Illuminate\Database\Seeder;
+
 use Spatie\Permission\PermissionRegistrar;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class RolesAndPermissionsSeeder extends Seeder {
+class NewTenantSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
@@ -15,7 +17,6 @@ class RolesAndPermissionsSeeder extends Seeder {
 
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        try {
 
             Permission::create(['name' => 'users.create']);
             Permission::create(['name' => 'users.edit']);
@@ -52,9 +53,18 @@ class RolesAndPermissionsSeeder extends Seeder {
                     'employees.*'
                 ]
             );
-        }catch (Exception $e) {
-            //
-        }
+
+            $tenant = app('currentTenant');
+
+            $superAdmin = Admin::create([
+                                            'slug' => 'root',
+                                            'name' => 'Super Admin',
+                                            'tenant_id'=>$tenant->id
+                                        ]);
+
+            $superAdmin->user->assignRole('super-system-admin');
+
+
 
 
     }
