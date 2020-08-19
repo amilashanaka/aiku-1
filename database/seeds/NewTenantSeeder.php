@@ -57,7 +57,7 @@ class NewTenantSeeder extends Seeder {
             $tenant = app('currentTenant');
 
             $superAdmin = Admin::create([
-                                            'slug' => 'root',
+                                            'slug' => 'super-admin',
                                             'name' => 'Super Admin',
                                             'tenant_id'=>$tenant->id
                                         ]);
