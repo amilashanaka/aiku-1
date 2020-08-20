@@ -9,7 +9,8 @@ type Query {
     tenant(id: ID @eq): Tenant @find
 
     users: [User!]! @paginate(defaultCount: 100)
-    user(id: ID @eq): User @find
+
+    user(handle: String @eq): User @find
 
     employee(id: ID @eq): Employee @find
 

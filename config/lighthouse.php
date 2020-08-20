@@ -40,19 +40,10 @@ return [
          * make sure to return spec-compliant responses in case an error is thrown.
          */
         'middleware' => [
-
-
             AcceptJson::class,
-
             EnsureFrontendRequestsAreStateful::class,
-
-            'auth:sanctum',
-
-
-            // Logs in a user if they are authenticated. In contrast to Laravel 'auth'
-            // middleware, this delegates auth and permission checks to the field level.
+            //'auth:sanctum',
             AttemptAuthentication::class,
-
             // Logs every incoming GraphQL query.
             // \Nuwave\Lighthouse\Support\Http\Middleware\LogGraphQLQueries::class,
         ],
